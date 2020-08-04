@@ -1,2 +1,5 @@
 __pycache__
 Pictures
+dist
+build
+*.spec
