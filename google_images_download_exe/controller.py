@@ -43,8 +43,8 @@ class Controller():
         self.view = View(self.image_canvas, self.root, self.model.arguments['output_directory'], self.gallery_scrollbar)
         self.keyword_list = []
         self.input_library = {} # keys matching arguments, include label and entry widgets
-        self.colours = ['red', 'orange', 'yellow', 'green', 'teal', 'blue', 'purple', 'pink', 'white', 'gray', 'black', 'brown']
-        self.colour_types = ['full-color', 'black-and-white', 'transparent']
+        self.colours = ['none', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'purple', 'pink', 'white', 'gray', 'black', 'brown']
+        self.colour_types = ['none', 'full-color', 'black-and-white', 'transparent']
         # for when multiple keywords accepted, currently disabled
 #         self.keyword_list = [keyword.strip() for keyword in self.model.arguments["keywords"].split(",")]
 
@@ -130,7 +130,7 @@ class Controller():
     
     def create_buttons(self, mainframe):
         buttons_commands = [("Download all", self.download_all), ("Search", self.search),
-         ("Load thumnails", self.existing_thumbnails), ("Read inputs", self.read_inputs)]
+         ("Load thumbnails", self.existing_thumbnails), ("Read inputs", self.read_inputs)]
         self.buttons = []
         row_index = 30
 
@@ -185,13 +185,21 @@ class Controller():
                 arguments[key] = " ".join(read_input.translate(str.maketrans('', '', ".,")).split())
                 self.input_library[key]['variable'].set(arguments[key])
             elif 'color' in key:
-                read_input = self.input_library[key]['widget'].curselection()
-                if len(read_input) == 1 and key == 'color': arguments[key] = self.colours[int(read_input[0])]
-                elif len(read_input) == 1 and key == 'color_type': arguments[key] = self.colour_types[int(read_input[0])]
-                elif len(read_input) > 1: self.input_library['readout']['variable'].set(value='Too many colour inputs')
-            elif read_input == 'None':
-                arguments[key] = None
+                list_indicies = self.input_library[key]['widget'].curselection()
+                
+                # capture multi-inputs
+                if len(list_indicies) > 1:
+                    self.input_library['readout']['variable'].set(value='Too many colour inputs')
+                    continue
+
+                if key == 'color': arguments[key] = self.colours[int(list_indicies[0])]
+                elif key == 'color_type': arguments[key] = self.colour_types[int(list_indicies[0])]
+            
             else: arguments[key] = read_input
+
+            # capture none inputs
+            if read_input.lower() == 'none' or arguments[key].lower() == 'none': arguments[key] = None
+            
         print(arguments.items())
         return arguments
 
@@ -202,7 +210,8 @@ class Controller():
         arguments = self.read_inputs(event)
         arguments['thumbnail_only'] = True
         try: self.model.download(arguments)
-        except: 
+        except Exception as e:
+            print(e)
             self.input_library['readout']['variable'].set(value='Search failed')
             return False
     
@@ -275,7 +284,7 @@ class Controller():
         self.root.title("Semiotics engine")
         
          # inputs must match argument keywords
-        input_list = ['keywords', 'specific_site', 'color', 'color_type', 'output_directory', 'limit']
+        input_list = ['keywords', 'specific_site', 'output_directory', 'limit']
         self.create_labels(self.control_panel, input_list)
         self.create_inputs(self.control_panel, input_list)
         self.create_buttons(self.control_panel)
