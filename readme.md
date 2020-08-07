@@ -1,9 +1,8 @@
 # Product Name
 
-This is a batch downloader for Google images as a Windows executable for anyone who does not want or cannot run a Python script.
+This is a batch downloader for Google images as a Windows executable which does not require any installation.
 
 [![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
 This executable provides simple and fast way to search and download Googe images in a simple GUI for users not using Python. The download functionalities come from google-images-download by hardikvasa (https://github.com/hardikvasa/google-images-download/), and this project adds a simple Tkinter GUI and has packaged in PyInstaller executable.
@@ -14,19 +13,17 @@ Start by entering your search terms (keywords, colour, specific site, # limit) i
 
 ## Installation
 
-
 Windows:
 
-Download Semiotics.Engine.v[x.y.z].zip from https://github.com/eyjho/google_images_download_exe/releases. Extract into your working directory, and run using the shortcut. No installation required. All images will be downloaded into the \Pictures directory by default, which will be in the same directory as the shortcut, or the directory above the .exe file.
+Download Semiotics.Engine.v[x.y.z].zip from https://github.com/eyjho/google_images_download_exe/releases. Extract into your working directory, and run using the shortcut. No installation required. All images will be downloaded into the \Pictures directory by default, which will be in the same directory as the shortcut, or the directory above the .exe file. Note that the shortcut in the package is a relative link, and therefore will not work if moved. For a moveable shortcut, find Semiotics Engine\Semiotics Engine.exe, and create a shortcut.
 
+![](directory.png)
 
-OS X & Linux:
-
-TBC
+OS X & Linux: TBC
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+![](gui_search.png)
 
 _For more examples and usage, please refer to the [Wiki][wiki]._
 
@@ -57,6 +54,4 @@ https://github.com/eyjho/google_images_download_exe
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/datadog-metrics
 [npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
 [wiki]: https://github.com/yourname/yourproject/wiki
