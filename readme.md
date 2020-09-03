@@ -2,6 +2,8 @@
 
 This is a batch downloader for Google images as a Windows executable which does not require any installation.
 
+WARNING: Currently not working due to changes in Google's webpages.
+
 # Product description
 
 This executable provides simple and fast way to search and download Googe images in a simple GUI for users not using Python. The download functionalities come from google-images-download by hardikvasa (https://github.com/hardikvasa/google-images-download/), and this project adds a simple Tkinter GUI and has packaged in PyInstaller executable.
