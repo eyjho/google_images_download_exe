@@ -295,6 +295,3 @@ class Controller():
 # for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
 # keywords_entry.focus()
 # root.bind('<Return>', search)
-
-
-    
