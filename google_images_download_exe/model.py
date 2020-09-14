@@ -45,6 +45,8 @@ class Model():
         # key user inputs
         arguments['keywords'] = 'panda'
         arguments['output_directory'] = os.path.join(os.path.dirname(os.getcwd()), 'Pictures')
+        print(os.getcwd())
+        print(arguments['output_directory'])
         arguments['limit'] = 5
 
         # functional inputs
